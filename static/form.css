@@ -1,0 +1,39 @@
+.container form{
+    margin: auto;
+    max-width: 450px;
+    display: flex;
+    flex-direction: column;
+}
+
+.container form h2{
+    margin: auto;
+}
+
+
+.container form img{
+    align-self: center;
+}
+
+
+.container form label{
+    margin-bottom: 0px !important;
+}
+
+.container form button{
+    margin: auto;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    width: 50%;
+    background-color: #A02878;
+    border-color: #A02878;
+}
+
+.container form button:hover{
+    margin: auto;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    width: 50%;
+    background-color: #c62390;
+    border-color: #c62390;
+
+}

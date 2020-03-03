@@ -1,23 +1,66 @@
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='form.css') }}">
+  <!-- <link rel="stylesheet" href="/src/css/"> -->
   <title>Document</title>
 </head>
-<body>
-  
-  <form action="{{ url_for('clientes_cadastro') }}" method="POST" >
-    <h1>ITEM</h1>
-    <input type="text" name="nome" placeholder="Nome do cliente"><br>
-    <input type="text" name="cpf" placeholder="CPF"><br>
-    <input type="text" name="endereco" placeholder="Endereço do cliente"><br>
-    <input type="text" name="tel_residencial" placeholder="Número do telefone residencial"><br>
-    <input type="text" name="tel_movel" placeholder="Número do telefone/celular"><br>
-    <button type="submit">Cadastrar</button>
 
-  </form>
+<body>
+
+  <div class="container">
+
+
+    <form action="{{ url_for('clientes_cadastro') }}" method="POST">
+
+      <img src="static/img/logo/Retangulo1.png" alt="" width="50%">
+      <h2>Cliente</h2>
+
+      <div class="form-group">
+        <label for="nomeCliente">
+          <h4> Nome</h4>
+        </label>
+        <input type="text" name="nome" placeholder="Nome do cliente" class="form-control" id="nomeCliente" class="form-control">
+      </div>
+
+      <div class="form-group">
+        <label for="cpfCliente">
+          <h4>CPF</h4>
+        </label>
+        <input type="text" name="cpf" placeholder="CPF" id="cpfCliente" class="form-control">
+      </div>
+
+      <div class="form-group">
+        <label for="enderecoCliente">
+          <h4>Endereço</h4>
+        </label>
+        <input type="text" name="endereco" placeholder="Endereço do cliente" id="enderecoCliente" class="form-control">
+      </div>
+
+      <div class="form-group">
+        <label for="telefoneResidencialCliente">
+          <h4>Telefone residencial</h4>
+        </label>
+        <input type="text" name="tel_residencial" placeholder="Número do telefone residencial"
+          id="telefoneResidencialCliente" class="form-control">
+      </div>
+
+      <div class="form-group">
+        <label for="telefoneCelularCliente">
+          <h4>Telefone celular</h4>
+        </label>
+        <input type="text" name="tel_movel" placeholder="Número do telefone/celular" id="telefoneCelularCliente" class="form-control">
+      </div>
+
+      <button type="submit" class="btn btn-primary">Cadastrar</button>
+
+    </form>
+  </div>
 
 </body>
-</html>
 
+</html>
