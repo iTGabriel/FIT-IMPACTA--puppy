@@ -1,22 +1,54 @@
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap.css') }}">
   <title>Document</title>
 </head>
-<body>
-    {% block clientes_todos %}
-  
-    <!-- <ul> -->
-        {% for cliente in lista_clientes %}
-          <!-- <li> -->
-              <h1 href="{{ cliente }}">{{ cliente}}</h1>
-            <!-- </li> -->
-        {% endfor %}
-        <!-- </ul> -->
 
+<body>
+
+  <div class="container">
+    {% block clientes_todos %}
+
+    <table class="table">
+      <thead class="thead-dark">
+        <tr>
+          <th>ID</th>
+          <th>Nome</th>
+          <th>CPF</th>
+          <th>Endereco</th>
+          <th>Tell residencial</th>
+          <th>Tell celular</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        {% for cliente in lista_clientes %}
+        <tr scope="row">
+          <!-- <th>{{cliente.id}}</th>
+          <td>{{cliente.nome}}</td>
+          <td>{{cliente.cpf}}</td>
+          <td>{{cliente.endereco}}</td>
+          <td>{{cliente.telefone_residencial}}</td>
+          <td>{{cliente.telefone_celular}}</td> -->
+
+
+          <th >{{lista_clientes[cliente]}}</th>
+          <td>{{lista_clientes[cliente]}}</td> 
+          <td>{{lista_clientes[cliente]}}</td>
+          <td>{{lista_clientes[cliente]}}</td>
+          <td>{{lista_clientes[cliente]}}</td>
+          <td>{{lista_clientes[cliente]}}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
     {% endblock %}
+  </div>
 
 </body>
+
 </html>
