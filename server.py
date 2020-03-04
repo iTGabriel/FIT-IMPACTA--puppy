@@ -5,7 +5,7 @@ import json
 
 app = Flask(__name__)
 
-# ROTAS CLIENTE
+# ROTAS DE INDEX/CADASTRO
 
 ## BUSCA DE TODOS OS REGISTRO DA TABELA CLIENTES
 @app.route('/clientes')
@@ -15,6 +15,18 @@ def clientes():
     #     # return cliente.select_all()
     # except:
     #     return "Falha em realizar busca de todos os 'clientes'"
+
+
+@app.route('/clinica')
+def clinica():
+        return render_template('cadastro_clinica.html')
+
+
+
+# FIM ROTAS DE INDEX/CADASTRO
+
+
+
 
 @app.route('/clientes/all')
 def clientes_todos():
@@ -54,7 +66,6 @@ def buscar_cliente():
         return "Falha em realizar busca do client pelo id {}".format(idCliente)
 
 
-### FIM ROAS CLIENTE !!!
 
 
 
