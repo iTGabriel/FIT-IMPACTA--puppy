@@ -10,8 +10,8 @@
 
 <body>
 
+  {% block clientes_todos %}
   <div class="container">
-    {% block clientes_todos %}
 
     <table class="table">
       <thead class="thead-dark">
@@ -19,35 +19,27 @@
           <th>ID</th>
           <th>Nome</th>
           <th>CPF</th>
-          <th>Endereco</th>
-          <th>Tell residencial</th>
-          <th>Tell celular</th>
+          <th>endereco</th>
+          <th>Telefone Residencial</th>
+          <th>Telefone Celular</th>
         </tr>
       </thead>
-
+      {% for cliente in lista_clientes %}
       <tbody>
-        {% for cliente in lista_clientes %}
-        <tr scope="row">
-          <!-- <th>{{cliente.id}}</th>
-          <td>{{cliente.nome}}</td>
-          <td>{{cliente.cpf}}</td>
-          <td>{{cliente.endereco}}</td>
-          <td>{{cliente.telefone_residencial}}</td>
-          <td>{{cliente.telefone_celular}}</td> -->
-
-
-          <th >{{lista_clientes[cliente]}}</th>
-          <td>{{lista_clientes[cliente]}}</td> 
-          <td>{{lista_clientes[cliente]}}</td>
-          <td>{{lista_clientes[cliente]}}</td>
-          <td>{{lista_clientes[cliente]}}</td>
-          <td>{{lista_clientes[cliente]}}</td>
+        <tr>
+          <td>{{cliente[0]}}</td>
+          <td>{{cliente[2]}}</td>
+          <td>{{cliente[1]}}</td>
+          <td>{{cliente[3]}}</td>
+          <td>{{cliente[4]}}</td>
+          <td>{{cliente[5]}}</td>
         </tr>
-        {% endfor %}
       </tbody>
+      {% endfor %}
+     
     </table>
-    {% endblock %}
   </div>
+  {% endblock %}
 
 </body>
 

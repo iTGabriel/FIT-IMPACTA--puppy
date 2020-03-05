@@ -11,32 +11,31 @@ app = Flask(__name__)
 @app.route('/clientes')
 def clientes():
         return render_template('cadastro_cliente.html')
-    # try:
-    #     # return cliente.select_all()
-    # except:
-    #     return "Falha em realizar busca de todos os 'clientes'"
-
-
-@app.route('/clinica')
-def clinica():
-        return render_template('cadastro_clinica.html')
-
-
-
-# FIM ROTAS DE INDEX/CADASTRO
-
 
 
 
 @app.route('/clientes/all')
 def clientes_todos():
+    try:
         items = cliente.select_all()
-        dados = {'id': items[0][0], 'nome': items[0][2], 'cpf': items[0][1], 'endereco': items[0][3], 'telefone_residencial': items[0][4], 'telefone_celular': items[0][5]}
-        return render_template('dados_cliente.html', lista_clientes = dados)
-    # try:
-    #     # return cliente.select_all()
-    # except:
-    #     return "Falha em realizar busca de todos os 'clientes'"
+    except:
+        print("Falha em mostrar os dados de clientes")
+        return ''
+
+    return render_template('dados_cliente.html', lista_clientes = items)
+
+
+
+@app.route('/clientes/buscar-cliente')
+def buscar_cliente():
+    idCliente = request.args['idCliente']
+    try:
+        busca = cliente.busca_por_id(idCliente)
+        return busca
+    except:
+        return "Falha em realizar busca do client pelo id {}".format(idCliente)
+
+
 
 
 ## CADASTRO DE CONTA/1REGISTRO NA TABELA CLIENTE
@@ -55,18 +54,39 @@ def clientes_cadastro():
     except:
         return "Falha em realizar cadastro de clientes"
 
-@app.route('/clientes/buscar-cliente')
-def buscar_cliente():
-    idCliente = request.args['idCliente']
+@app.route('/clientes/select_atualizar_cliente')
+def select_atualizar_cliente():
     try:
-        busca = cliente.busca_por_id(idCliente)
-        print(busca)
-        return busca
+        items = cliente.select_all()
     except:
-        return "Falha em realizar busca do client pelo id {}".format(idCliente)
+        return "Falha em encontrar o cliente"
+
+    return render_template('update_cliente.html', lista_clientes = items)
+
+@app.route('/clientes/atualizar_cliente')
+def atualizar_cliente():
+    try:
+        items = cliente.select_all()
+    except:
+        return "Falha em encontrar o cliente"
+
+    return render_template('tela_update_cliente.html', lista_clientes = items)
+
+@app.route('/clientes/atualizar_cliente/')
+def atualizar_cliente_x():
 
 
+    id_cliente = request.args('[id_cliente]')
 
+    cliente.busca_por_id(id_cliente)
+    print(id_cliente)
+    return f"Seu ID de cliente é: {id_cliente}"
+    # try:
+    #     items = cliente.select_all()
+    # except:
+    #     return "Falha em encontrar o cliente"
+
+    # return render_template('tela_update_cliente_n.html', lista_clientes = items)
 
 
 
