@@ -16,15 +16,18 @@ def select_all():
 
 # SELECT DOS DADOS DA TABELA 'X' FILTRANDO POR ID OU 'TEXTO' COMPLETO INFORMADO PELO USUÁRIO ATRAVÉS(SEGUNDA OPÇÃO) DO CAMPO PRINCIPAL/ALTERNATIVO DO ID
 def busca_por_id(id_Cliente):
-    connection = sqlite3.connect('db_puppy.db')
-    cursor = connection.cursor()
-    sql = "SELECT * FROM Cliente WHERE id_cliente = {}".format(id_Cliente)
-    id_cliente = cursor.lastrowid
-    cursor.execute(sql, (id_Cliente))
-    cursor.close()
-    connection.commit()
-    connection.close()
-    return id_cliente
+    try:
+        connection = sqlite3.connect('db_puppy.db')
+        cursor = connection.cursor()
+        cursor.execute("SELECT * FROM Cliente WHERE id_cliente = {}".format(id_Cliente))
+        busca = cursor.fetchall()
+        print(busca)
+        cursor.close()
+        connection.close()
+        return busca
+    except:
+        return "Falha"
+        
 
 
 

@@ -54,40 +54,26 @@ def clientes_cadastro():
     except:
         return "Falha em realizar cadastro de clientes"
 
-@app.route('/clientes/select_atualizar_cliente')
+@app.route('/clientes/select_atualizar_cliente', methods=['POST', 'GET'])
 def select_atualizar_cliente():
     try:
         items = cliente.select_all()
     except:
         return "Falha em encontrar o cliente"
-
     return render_template('update_cliente.html', lista_clientes = items)
 
-@app.route('/clientes/atualizar_cliente')
+@app.route('/clientes/atualizar_cliente', methods=['GET', 'POST'])
 def atualizar_cliente():
-    try:
-        items = cliente.select_all()
-    except:
-        return "Falha em encontrar o cliente"
-
-    return render_template('tela_update_cliente.html', lista_clientes = items)
-
-@app.route('/clientes/atualizar_cliente/')
-def atualizar_cliente_x():
-
-
-    id_cliente = request.args('[id_cliente]')
-
-    cliente.busca_por_id(id_cliente)
-    print(id_cliente)
-    return f"Seu ID de cliente é: {id_cliente}"
+    dados = request.form['dados_select'].replace("'", "").split(',')
     # try:
-    #     items = cliente.select_all()
+    #     resultado = cliente.busca_por_id(idCliente)
+    #     resultado = resultado.json(resultado)
+    #     print("Resultado -> {}".format(resultado))
     # except:
-    #     return "Falha em encontrar o cliente"
-
-    # return render_template('tela_update_cliente_n.html', lista_clientes = items)
-
+    #     return "FALHA"
+    print(dados)
+    return render_template('tela_update_cliente.html', dados_cliente = dados)
+    
 
 
 

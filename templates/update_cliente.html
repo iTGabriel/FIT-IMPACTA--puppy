@@ -1,4 +1,4 @@
-<html lang="en">
+<html>
 
 <head>
     <meta charset="UTF-8">
@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='form.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='update_cliente.css') }}">
     <title>Document</title>
 </head>
 
@@ -15,19 +16,20 @@
     <div class="container">
 
 
-        <form action="{{ url_for('select_atualizar_cliente') }}" method="POST">
+        <form action="{{ url_for('atualizar_cliente') }}" method="POST">
 
             <img src="../static/img/logo/Retangulo1.png" alt="" width="50%">
 
-            <h2>Selecione o cliente para alteração de dados</h2>
+            <h2 style="text-align: center;">Selecione o cliente para alteração de dados</h2>
 
-            <select class="browser-default custom-select">
+            <br>
+
+            <select class="browser-default custom-select" name='dados_select'>
                 {% for cliente in lista_clientes %}
-                <option selected>{{cliente[0]}} -
-                 {{cliente[2]}}</option>
+                <option selected value='{{cliente}}'>{{cliente[0]}} - {{cliente[2]}}</option>
                 {% endfor %}
             </select>
-
+            <br>
 
 
             <button type="submit" class="btn btn-primary">Atualizar</button>

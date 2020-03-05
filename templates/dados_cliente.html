@@ -5,13 +5,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='table.css') }}">
   <title>Document</title>
 </head>
 
 <body>
-
+  
+  
   {% block clientes_todos %}
   <div class="container">
+    <img src="../static/img/logo/Retangulo1.png" alt="" width="20%">
 
     <table class="table">
       <thead class="thead-dark">
@@ -22,6 +25,7 @@
           <th>endereco</th>
           <th>Telefone Residencial</th>
           <th>Telefone Celular</th>
+          <th colspan="2" style="text-align: center;" >OPÇÕES</th>
         </tr>
       </thead>
       {% for cliente in lista_clientes %}
@@ -33,6 +37,9 @@
           <td>{{cliente[3]}}</td>
           <td>{{cliente[4]}}</td>
           <td>{{cliente[5]}}</td>
+          <td><a>Alterar</a></td>
+          <td><a>Remover</a></td>
+          
         </tr>
       </tbody>
       {% endfor %}
