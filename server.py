@@ -1,85 +1,108 @@
 from flask import Flask, escape, render_template, request, redirect, session, flash, url_for
-from services import client as cliente
+from services import usuario as usuario
 from bd import puppy_bd as scriptPUPPYDATABASE
 import json
 
 app = Flask(__name__)
 
-# ROTAS DE INDEX/CADASTRO
 
-## BUSCA DE TODOS OS REGISTRO DA TABELA CLIENTES
-@app.route('/clientes')
-def clientes():
-        return render_template('cadastro_cliente.html')
+## BUSCA TODOS OS REGISTRO DA TABELA CLIENTES
+@app.route('/adm/usuarios/listagem/')
+def usuario_listagem():
+    items = usuario.select_all()
+    return render_template('lista_usuarios.html', lista_usuarios = items)
 
 
-
-@app.route('/clientes/all')
-def clientes_todos():
-    try:
-        items = cliente.select_all()
-    except:
-        print("Falha em mostrar os dados de clientes")
-        return ''
-
-    return render_template('dados_cliente.html', lista_clientes = items)
+##########################################
+############# leirbagti@ #################
+##########################################
 
 
 
-@app.route('/clientes/buscar-cliente')
-def buscar_cliente():
-    idCliente = request.args['idCliente']
-    try:
-        busca = cliente.busca_por_id(idCliente)
-        return busca
-    except:
-        return "Falha em realizar busca do client pelo id {}".format(idCliente)
+# ROTA DE INICIO/LOGIN
+@app.route('/')
+def index():
+    return render_template('index.html')
 
 
+### ROTAS DE USUÁRIO ###
 
+# LOGIN
+@app.route('/usuario/login/',  methods=['POST'])
+def usuario_login():
 
-## CADASTRO DE CONTA/1REGISTRO NA TABELA CLIENTE
-@app.route('/clientes/cadastro', methods=['POST'])
-def clientes_cadastro():
-    # O NOME DENTRO DO COLCHETES É O NOME DO CAMPO QUE SERÁ CONSUMIDO DO FRONT-END
-    nome = request.form['nome']
-    cpf = request.form['cpf']
-    endereco = request.form['endereco']
-    tel_residencial = request.form['tel_residencial']
-    tel_movel = request.form['tel_movel']
+    login = request.form['login_usuario']
+    senha = request.form['senha_usuario']
 
     try:
-        cliente.insert_dados(nome, cpf, endereco, tel_residencial, tel_movel)
-        return render_template('dados_cliente.html', lista_clientes = cliente.select_all())
+        busca = usuario.buscar_usuario(senha, login)
+        if busca != None:
+            return render_template('bem_vindo.html', dados_usuario = busca)
     except:
-        return "Falha em realizar cadastro de clientes"
+            return "Usuário ou senha errado"
 
-@app.route('/clientes/select_atualizar_cliente', methods=['POST', 'GET'])
-def select_atualizar_cliente():
+
+# CADASTRO
+@app.route('/usuario/cadastro', methods=['POST'])
+def usuario_cadastro():
+    
+    nome = request.form['nome_usuario']
+    login = request.form['nome_login_usuario']
+    senha = request.form['senha_usuario']
+    cpf = request.form['cpf_usuario']
+    endereco = request.form['endereco_usuario']
+    telefone = request.form['tel_residencial_usuario']
+    celular = request.form['tel_movel_usuario']
+    
     try:
-        items = cliente.select_all()
+        usuario.insert_dados(nome, login, senha, cpf, endereco, telefone, celular)
+        try:
+            busca = usuario.buscar_usuario(senha, login, cpf)
+            return render_template('bem_vindo.html', dados_usuario = busca)
+        except:
+            return "Falha em realizar busca"
     except:
-        return "Falha em encontrar o cliente"
-    return render_template('update_cliente.html', lista_clientes = items)
+        return "Falha em realizar cadastro"
 
-@app.route('/clientes/atualizar_cliente', methods=['GET', 'POST'])
-def atualizar_cliente():
-    dados = request.form['dados_select'].replace("'", "").split(',')
-    # try:
-    #     resultado = cliente.busca_por_id(idCliente)
-    #     resultado = resultado.json(resultado)
-    #     print("Resultado -> {}".format(resultado))
-    # except:
-    #     return "FALHA"
-    print(dados)
-    return render_template('tela_update_cliente.html', dados_cliente = dados)
+
+# UPDATE/ATUALIZAR
+@app.route('/usuario/atualizar', methods=['POST'])
+def usuario_atualizar():
+
+    id_usuario = request.form['id_usuario']
+    login = request.form['login_usuario']
+    senha = request.form['senha_usuario']
+    nome = request.form['nome_usuario']
+    cpf = request.form['cpf_usuario']
+    endereco = request.form['endereco_usuario']
+    telefone = request.form['tel_residencial_usuario']
+    celular = request.form['tel_movel_usuario']
+
+    try:
+        update = usuario.update_usuario(nome, login, senha, cpf, endereco, telefone, celular, id_usuario)
+        print(update)
+        if update == True:
+            return render_template('bem_vindo.html', dados_usuario = [id_usuario, login, senha, nome, cpf, endereco, telefone, celular])
+    except:
+        return "Falha em atualizar os dados"
     
 
+@app.route('/usuario/delete/', methods=['POST'])
+def usuario_remover():
+    try:
+        id_usuario = request.form['id_usuario']
+        exclusao = usuario.remover_id(id_usuario)
+        if exclusao == True:
+            return usuario_listagem()
+    except:
+        return "Falha em realizar remoção do usuário."
 
-
+### FIM ROTAS DE USUÁRIO ###
 
 
 scriptPUPPYDATABASE.criar_muitasTabelas()
+
+
 if __name__ == "__main__":
     app.run(host='127.0.0.1', port='4811')
     

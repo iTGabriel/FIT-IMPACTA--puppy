@@ -1,0 +1,136 @@
+{% include "util/frameworks.html" %}
+
+<link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
+
+<title>Bem vindo - Puppy</title>
+</head>
+
+<body>
+    <div class="container">
+        <img src="{{ url_for('static', filename='img/logo/Retangulo1.png') }}" alt="" width="75%">
+
+        <h2 style="margin-bottom: 10px;">Bem vindo: {{ dados_usuario[1] }}</h2>
+        <span>Login: {{ dados_usuario[1] }}</span>
+        <span>Senha: {{ dados_usuario[2] }}</span>
+        <span>CPF: {{ dados_usuario[3] }}</span>
+        <span>Nome: {{ dados_usuario[4] }}</span>
+        <span>Endereco: {{ dados_usuario[5] }}</span>
+        <span>Contato telefone: {{ dados_usuario[6] }}</span>
+        <span>Contato celular: {{ dados_usuario[7] }}</span>
+
+
+        <div class="btn_login">
+            <button class="btn" data-toggle="modal" data-target="#modal_atualizar_dados">Atualizar dados</button>
+        </div>
+
+
+
+        <div class="modal fade" id="modal_atualizar_dados" tabindex="-1" role="dialog"
+            aria-labelledby="modal_atualizar_dados_label" aria-hidden="true">
+
+            <div class="modal-dialog" role="document">
+
+                <div class="modal-content">
+
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        <img src="{{ url_for('static', filename='img/logo/Retangulo1.png') }}" alt="" width="25%">
+
+                        <h5 class="modal-title" id="modal_atualizar_dados_label">Atualizar dados</h5>
+                    </div>
+
+                    <div class="modal-body">
+                        <form action="{{ url_for('usuario_atualizar') }}" method="POST">
+
+                            <div class="form-group">
+                                <label for="nome_usuario">
+                                    <h5> Nome</h5>
+                                </label>
+
+                                <input type="text" name="nome_usuario"  value="{{dados_usuario[4]}}"
+                                    class="form-control" id="nome_usuario" class="form-control">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="login_usuario">
+                                    <h5> Login</h5>
+                                </label>
+
+                                <input type="text" name="login_usuario"  value="{{dados_usuario[1]}}"
+                                    class="form-control" id="login_usuario" class="form-control">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="senha_usuario">
+                                    <h5> Senha</h5>
+                                </label>
+
+                                <input type="text" name="senha_usuario"  value="{{dados_usuario[2]}}"
+                                    class="form-control" id="senha_usuario" class="form-control">
+                            </div>
+
+
+                            <div class="form-group">
+                                <label for="cpf_usuario">
+                                    <h5> CPF</h5>
+                                </label>
+
+                                <input type="text" name="cpf_usuario"  value="{{dados_usuario[3]}}" class="form-control"
+                                    id="cpf_usuario" class="form-control">
+                            </div>
+
+
+
+                            <div class="form-group">
+                                <label for="endereco_usuario">
+                                    <h5> Endereço</h5>
+                                </label>
+
+                                <input type="text" name="endereco_usuario"  value="{{dados_usuario[5]}}"
+                                    class="form-control" id="endereco_usuario" class="form-control">
+                            </div>
+
+
+                            <div class="form-group">
+                                <label for="tel_residencial_usuario">
+                                    <h5> Telefone residencial</h5>
+                                </label>
+
+                                <input type="text" name="tel_residencial_usuario"
+                                     value="{{dados_usuario[6]}}" class="form-control"
+                                    id="tel_residencial_usuario" class="form-control">
+                            </div>
+
+
+
+                            <div class="form-group">
+                                <label for="tel_movel_usuario">
+                                    <h5> Telefone celular</h5>
+                                </label>
+
+                                <input type="text" name="tel_movel_usuario" value="{{dados_usuario[7]}}"
+                                    class="form-control" id="tel_movel_usuario" class="form-control">
+                            </div>
+
+
+                            <div class="modal-footer">
+                                <button type="submit" class="btn" name="id_usuario" value="{{dados_usuario[0]}}">Atualizar</button>
+                            </div>
+
+                        </form>
+                    </div>
+
+
+                </div>
+            </div>
+
+        </div>
+
+
+
+    </div>
+</body>
+
+</html>

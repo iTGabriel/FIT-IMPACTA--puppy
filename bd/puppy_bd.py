@@ -4,6 +4,8 @@ sql_create = [
     
     ''' CREATE TABLE IF NOT EXISTS Cliente (
     id_cliente integer primary key autoincrement,
+    usuario varchar(20) unique,
+    senha varchar(50),
     cpf varchar(11) unique,
     nome varchar(50),
     endereco varchar(100),

@@ -1,0 +1,45 @@
+{% include "util/frameworks.html" %}
+
+<link rel="stylesheet" href="{{ url_for('static', filename='table.css') }}">
+<title>ADM listagem usuario - Puppy</title>
+</head>
+
+<body>
+  <div class="container">
+    <img src="{{ url_for('static', filename='img/logo/Retangulo1.png') }}" alt="" width="20%">
+
+    <table class="table">
+      <thead class="thead-dark">
+        <tr>
+          <th>ID</th>
+          <th>Nome</th>
+          <th>CPF</th>
+          <th>endereco</th>
+          <th>Telefone Residencial</th>
+          <th>Telefone Celular</th>
+          <th colspan="2" style="text-align: center;">OPÇÕES</th>
+        </tr>
+      </thead>
+      {% for usuario in lista_usuarios %}
+      <tbody>
+        <tr>
+          <form action="{{ url_for('usuario_remover') }}" method="POST">
+            <td>{{usuario[0]}}</td>
+            <td>{{usuario[2]}}</td>
+            <td>{{usuario[1]}}</td>
+            <td>{{usuario[3]}}</td>
+            <td>{{usuario[4]}}</td>
+            <td>{{usuario[5]}}</td>
+            <td><button name="id_usuario" value="{{ usuario[0] }}" >Remover</button></td>
+          </form>
+
+        </tr>
+      </tbody>
+      {% endfor %}
+
+    </table>
+  </div>
+
+</body>
+
+</html>
